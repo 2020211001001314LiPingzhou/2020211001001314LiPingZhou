@@ -8,7 +8,6 @@
         <servlet-name>Print</servlet-name>
         <servlet-class>com.lipingzhou.week2.PrintServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Print</servlet-name>
         <url-pattern>/print</url-pattern>

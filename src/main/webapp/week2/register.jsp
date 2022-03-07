@@ -82,7 +82,7 @@
     </script>
 </head>
 <body>
-<form action="#" method="post" id="form">
+<form action="/2020211001001314LiPingzhou/register" method="post" id="form">
     <table>
         <tr>
             <td><label for="username">Username</label></td>
@@ -115,7 +115,7 @@
             <td><input type="date" name="birthday" id="Birthday"></td>
         </tr>
         <tr>
-            <td colspan="2" id="td_sub"><input type="submit" value="Register" id="btn_sub"></td>
+            <td><input type="submit" value="Register"></td>
         </tr>
     </table>
 </form>
