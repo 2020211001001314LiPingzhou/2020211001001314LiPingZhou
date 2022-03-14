@@ -36,10 +36,8 @@
             var s_username = document.getElementById("s_username");
 
             if (flag) {
-                //提示绿色对勾
                 s_username.innerHTML = "ok";
             } else {
-                //提示红色错误信息
                 s_username.innerHTML = "error!";
             }
             return flag;
@@ -57,10 +55,8 @@
             var s_password = document.getElementById("s_password");
 
             if(flag){
-                //提示绿色对勾
                 s_password.innerHTML = "ok";
             }else{
-                //提示红色错误信息
                 s_password.innerHTML = "error!";
             }
             return flag;
@@ -77,10 +73,8 @@
             var s_email = document.getElementById("s_email");
 
             if(flag){
-                //提示绿色对勾
                 s_email.innerHTML = "ok";
             }else{
-                //提示红色错误信息
                 s_email.innerHTML = "error!";
             }
             return flag;
@@ -88,7 +82,7 @@
     </script>
 </head>
 <body>
-<form action="#" method="post" id="form">
+<form action="/2020211001001314LiPingzhou/register" method="post" id="form">
     <table>
         <tr>
             <td><label for="username">Username</label></td>
@@ -121,7 +115,7 @@
             <td><input type="date" name="birthday" id="Birthday"></td>
         </tr>
         <tr>
-            <td colspan="2" id="td_sub"><input type="submit" value="Register" id="btn_sub"></td>
+            <td><input type="submit" value="Register"></td>
         </tr>
     </table>
 </form>

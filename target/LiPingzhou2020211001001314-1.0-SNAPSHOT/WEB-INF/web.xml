@@ -8,6 +8,10 @@
         <servlet-name>Print</servlet-name>
         <servlet-class>com.lipingzhou.week2.PrintServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.lipingzhou.week3.dome.RegisterServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>Print</servlet-name>
