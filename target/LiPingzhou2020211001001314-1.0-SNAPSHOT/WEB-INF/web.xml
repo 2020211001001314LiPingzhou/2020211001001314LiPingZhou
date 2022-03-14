@@ -3,14 +3,47 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.microsoft.sqlserver.jdbc.SQLServerDriver</param-value>
+    </context-param>
+    <context-param>
+        <param-name>url</param-name>
+        <param-value>jdbc:sqlserver://localhost; DatabaseName=userdb</param-value>
+    </context-param>
+    <context-param>
+        <param-name>Username</param-name>
+        <param-value>sa</param-value>
+    </context-param>
+    <context-param>
+        <param-name>Password</param-name>
+        <param-value>Good1314</param-value>
+    </context-param>
+    
 
     <servlet>
         <servlet-name>Print</servlet-name>
         <servlet-class>com.lipingzhou.week2.PrintServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>Print</servlet-name>
         <url-pattern>/print</url-pattern>
     </servlet-mapping>
+
+<!--    <servlet>-->
+<!--        <servlet-name>Config</servlet-name>-->
+<!--        <servlet-class>com.lipingzhou.week4.ConfigDomeServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>name</param-name>-->
+<!--            <param-value>LiPingzhou</param-value>-->
+<!--        </init-param>-->
+<!--        <init-param>-->
+<!--            <param-name>studentId</param-name>-->
+<!--            <param-value>2020211001001314</param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>Config</servlet-name>-->
+<!--        <url-pattern>/config</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>
