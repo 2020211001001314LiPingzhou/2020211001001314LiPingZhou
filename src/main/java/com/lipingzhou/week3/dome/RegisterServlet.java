@@ -24,7 +24,6 @@ public class RegisterServlet extends HttpServlet {
         String username = application.getInitParameter("Username");
         String password = application.getInitParameter("Password");
 
-
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);
