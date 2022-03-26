@@ -97,7 +97,7 @@ This is my register page.
         </tr>
         <tr>
             <td><label for="password">Password</label></td>
-            <td><input type="password" name="password" placeholder="请输入密码（长度在6~12位之间）"
+            <td><input type="password" name="password" placeholder="请输入密码（长度在8~20位之间）"
                                         id="password">
                 <span id="s_password"></span>
             </td>

@@ -18,7 +18,8 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        ServletContext application = getServletConfig().getServletContext();
+        /*
+        ServletContext application = getServletContext();
         String driver = application.getInitParameter("driver");
         String url = application.getInitParameter("url");
         String username = application.getInitParameter("Username");
@@ -30,8 +31,15 @@ public class RegisterServlet extends HttpServlet {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
+         */
+        conn = (Connection) getServletContext().getAttribute("conn");
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,48 +49,21 @@ public class RegisterServlet extends HttpServlet {
         String gender = request.getParameter("gender");
         String birthday = request.getParameter("birthday");
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        /*
-        out.print("<br> username :" + username);
-        out.print("<br> password :" + password);
-        out.print("<br> email :" + email);
-        out.print("<br> gender :" + gender);
-        out.print("<br> birth Date :" + birthday);
-        out.close();
-        */
-        out.print("        <!DOCTYPE html>");
-        out.print("<html>");
-        out.print("    <head>");
-        out.print("        <meta charset='UTF-8'>");
-        out.print("        <title>UserList</title>");
-
-        out.print("    </head>");
-        out.print("    <body>");
-        out.print("        <h1 align='center'>UserList</h1>");
-        out.print("        <hr>");
-        out.print("        <table border='1px' align='center' width='50%'>");
-        out.print("            <tr>");
-        out.print("                <th>ID</th>");
-        out.print("                <th>UserName</th>");
-        out.print("                <th>Password</th>");
-        out.print("                <th>Email</th>");
-        out.print("                <th>Gender</th>");
-        out.print("                <th>Birthdate</th>");
-        out.print("            </tr>");
+        //response.setContentType("text/html");
+        //PrintWriter out = response.getWriter();
 
         try {
-            String sql1 = "insert into Usertable(id, username, password, email, gender, birthdate) values(?,?,?,?,?,?)";
+            String sql1 = "insert into Usertable(username, password, email, gender, birthdate) values(?,?,?,?,?)";
             ps = conn.prepareStatement(sql1);
-            ps.setString(1, "1");
-            ps.setString(2, username);
-            ps.setString(3, password);
-            ps.setString(4, email);
-            ps.setString(5, gender);
-            ps.setString(6, birthday);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, email);
+            ps.setString(4, gender);
+            ps.setString(5, birthday);
             int num = ps.executeUpdate();
-            //out.print(num);
+            System.out.println("num-->" + num);
 
+            /*
             String sql2 = "select * from Usertable";
             ps = conn.prepareStatement(sql2);
             rs = ps.executeQuery();
@@ -94,48 +75,31 @@ public class RegisterServlet extends HttpServlet {
                 String gender2 = rs.getString("gender");
                 String birthday2 = rs.getString("birthdate");
 
-                /* 以下是动态的 */
-                out.print("            <tr>");
-                out.print("                <td>"+ id +"</td>");
-                out.print("                <td>"+ username2 +"</td>");
-                out.print("                <td>"+ password2 +"</td>");
-                out.print("                <td>"+ email2 +"</td>");
-                out.print("                <td>"+ gender2 +"</td>");
-                out.print("                <td>"+ birthday2 +"</td>");
-                out.print("            </tr>");
             }
+             */
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
+
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            if (rs!=null){
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (ps!=null){
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (conn!=null){
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
-        /* 以下是固定的 */
-        out.print("        </table>");
-        out.print("        <hr>");
-        out.print("    </body>");
-        out.print("</html>");
+    }
 
-        out.close();
+    @Override
+    public void destroy() {
+        if (rs!=null){
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (ps!=null){
+            try {
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
