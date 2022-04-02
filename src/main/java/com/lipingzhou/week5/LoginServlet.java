@@ -1,5 +1,7 @@
 package com.lipingzhou.week5;
 
+import com.lipingzhou.dao.UserDao;
+import com.lipingzhou.model.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -34,10 +36,11 @@ public class LoginServlet extends HttpServlet {
         conn = (Connection) getServletContext().getAttribute("conn");
     }
 
+    // doGet用于跳转到登录页面，doPost用于验证处理登录信息。
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request, response);
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
     }
 
     @Override
@@ -46,9 +49,7 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-
+        /*
         String sql = "Select * from usertable where username = ? and password = ?";
         try {
             ps = conn.prepareStatement(sql);
@@ -75,6 +76,22 @@ public class LoginServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        */
+
+        UserDao userDao = new UserDao();
+        try {
+             User user = userDao.findByUsernamePassword(conn, username, password);
+             if (user != null){
+                 request.setAttribute("user", user);
+                 request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request, response);
+             }else {
+                 request.setAttribute("message", "Username or Password Error!!!");
+                 request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
+             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
