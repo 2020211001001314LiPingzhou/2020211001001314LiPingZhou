@@ -7,10 +7,10 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-@WebServlet(name = "RegisterServlet", value = "/register"
-
-)
+@WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
     Connection conn = null;
     PreparedStatement ps = null;
@@ -59,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
             ps.setString(2, password);
             ps.setString(3, email);
             ps.setString(4, gender);
-            ps.setString(5, birthday);
+            ps.setDate(5, Date.valueOf(birthday));
             int num = ps.executeUpdate();
             System.out.println("num-->" + num);
 
