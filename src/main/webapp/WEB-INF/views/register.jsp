@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@include file="/./header.jsp"%>
+<%@include file="header.jsp"%>
 <html>
 <head>
     <title>Register</title>
@@ -86,7 +86,7 @@
 <body>
 
 This is my register page.
-<form action="/2020211001001314LiPingzhou/register" method="post" id="form">
+<form action="register" method="post" id="form">
     <table>
         <tr>
             <td><label for="username">Username</label></td>
@@ -126,4 +126,4 @@ This is my register page.
 </body>
 </html>
 
-<%@include file="/./footer.jsp"%>
+<%@include file="footer.jsp"%>
