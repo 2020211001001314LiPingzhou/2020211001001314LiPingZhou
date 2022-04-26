@@ -37,7 +37,8 @@ public class AdminAuthenticationFilter implements Filter {
             Chain.doFilter(request,response);//go to next destination
         }else {
             System.out.println(httpRequest.getContextPath());
-            httpResponse.sendRedirect(httpRequest.getContextPath()+"/admin/login");//go to login
+            //httpResponse.sendRedirect(httpRequest.getContextPath()+"/admin/home");//go to login
+            request.getRequestDispatcher("/admin/home").forward(httpRequest, httpResponse);
         }
     }
 

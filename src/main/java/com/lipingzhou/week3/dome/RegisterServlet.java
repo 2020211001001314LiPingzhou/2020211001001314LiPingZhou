@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String gender = request.getParameter("gender");
-        String birthday = request.getParameter("birthday");
+        String birthday = request.getParameter("birthDate");
 
         //response.setContentType("text/html");
         //PrintWriter out = response.getWriter();
@@ -77,7 +77,7 @@ public class RegisterServlet extends HttpServlet {
 
             }
              */
-            response.sendRedirect(request.getContextPath() + "/login.jsp");
+            response.sendRedirect("login");
 
         } catch (SQLException e) {
             e.printStackTrace();
