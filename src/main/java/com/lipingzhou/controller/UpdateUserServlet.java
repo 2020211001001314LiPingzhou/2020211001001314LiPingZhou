@@ -15,6 +15,13 @@ import java.text.SimpleDateFormat;
 
 @WebServlet(name = "UpdateUserServlet", value = "/updateUser")
 public class UpdateUserServlet extends HttpServlet {
+    private Connection con;
+
+    @Override
+    public void init() throws ServletException {
+        con = (Connection) getServletContext().getAttribute("conn");
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request, response);
@@ -22,7 +29,7 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
@@ -40,22 +47,21 @@ public class UpdateUserServlet extends HttpServlet {
         user.setBirthDate(Date.valueOf(birthday));
 
         UserDao userDao = new UserDao();
-        ServletContext application = getServletContext();
-        Connection conn = (Connection) application.getAttribute("conn");
         int num = 0;
         try {
-            num = userDao.updateUser(conn, user);
+            num = userDao.updateUser(con, user);
+            User updateUser = userDao.findById(con, id);
+            if (num != 0){
+                HttpSession session = request.getSession();
+                session.removeAttribute("user");
+                session.setAttribute("user", updateUser);
+                request.getRequestDispatcher("accountDetails").forward(request, response);
+            }else {
+                request.setAttribute("message", "Update fail!");
+                request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request, response);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        if (num != 0){
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            request.getRequestDispatcher("WEB-INF/views/userInfo.jsp").forward(request, response);
-        }else {
-            request.setAttribute("message", "Update fail!");
-            request.getRequestDispatcher("WEB-INF/views/updateUser.jsp").forward(request, response);
         }
     }
 }
