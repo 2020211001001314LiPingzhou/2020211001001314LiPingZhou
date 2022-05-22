@@ -47,6 +47,15 @@
 <!--        <url-pattern>/config</url-pattern>-->
 <!--    </servlet-mapping>-->
 
+    <filter>
+        <filter-name>LiPingzhou</filter-name>
+        <filter-class>com.lab2.LiPingzhouFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LiPingzhou</filter-name>
+        <url-pattern>/lab2/validate.jsp</url-pattern>
+    </filter-mapping>
+
     <welcome-file-list>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
