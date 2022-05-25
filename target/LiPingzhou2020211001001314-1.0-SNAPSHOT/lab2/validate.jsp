@@ -16,7 +16,7 @@
 <%--Todo 1: Use <jsp:useBean> to create a Login bean instance in request scope --%>
     <jsp:useBean id="user" class="com.lab2.Login" scope="request"/>
     <%--Todo 2: Use <jsp:setProperty> to set  beans' property username and password--%>
-    <jsp:setProperty name="user" property="username" value="LiPingzhou-2020211001001314"/>
+    <jsp:setProperty name="user" property="username" value="XinYuKun-2020211001001328"/>
     <jsp:setProperty name="user" property="password" value="123456"/>
 <%
    //todo 3: use if check username is admin and password is admin

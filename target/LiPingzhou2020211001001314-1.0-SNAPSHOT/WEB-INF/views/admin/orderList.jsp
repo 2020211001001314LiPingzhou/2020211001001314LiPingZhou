@@ -80,24 +80,24 @@
 						<tbody>
 					
 					<!-- loop_start -->
-					
+					<c:forEach var="o" items="${orderList}">
 						<tr>
-						<td>OID:order Id</td>
-						<td>order Date</td>
+						<td>OID:${o.orderId}</td>
+						<td>${o.orderDate}</td>
 						<%
 							Order o=(Order)pageContext.findAttribute("o");
 							int userId=o.getCustomerId();
-							java.sql.Connection con=(java.sql.Connection)application.getAttribute("con");
+							java.sql.Connection con=(java.sql.Connection)application.getAttribute("conn");
 							UserDao userDao=new UserDao();
 							String customerName=userDao.findById(con, userId).getUsername();
 							 %>
 						 <td><%=customerName %></td>
 						<td>
-						<p>first Name last Name<p> 
-						<p> address1</p>
-						<p>address2</p>
-						<p>city,state,country-postalCode</p><p>phone</p></td>
-						<td class="cart_total">
+						<p>${o.firstName} ${o.lastName}<p>
+						<p>${o.address1}</p>
+						<p>${o.address2}</p>
+						<p>${o.city},${o.state},${country}-${postalCode}</p><p>${o.phone}</p></td>
+						<td class="cart_total">${o.paymentId}
 						<%
 							int n=o.getPaymentId();
 							String paymentType= Payment.findByPaymentId(con,n);
@@ -107,7 +107,8 @@
 						<td><button class="btn btn-default update" id="${o.orderId }">Details</button></td>
 							</tr>
 							<tr>
-							
+
+					</c:forEach>
 						<!-- loop_end -->
 						
 					</tbody>

@@ -77,7 +77,8 @@ public class RegisterServlet extends HttpServlet {
 
             }
              */
-            response.sendRedirect("login");
+            request.setAttribute("message", "User Registered Successfully!");
+            request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
 
         } catch (SQLException e) {
             e.printStackTrace();
